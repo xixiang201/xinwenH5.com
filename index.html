@@ -1,0 +1,2012 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>暖色调婚姻数据新闻 H5</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+      crossorigin
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Han+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-dark: #2b211c;
+        --bg-light: #fff5ec;
+        --accent: #f26b38;
+        --accent-2: #f2b138;
+        --accent-3: #d95c8a;
+        --text-dark: #3c2a20;
+        --text-light: #fff7ef;
+        --muted: #9c7a65;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
+          sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-light);
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .page {
+        width: min(960px, 100%);
+        margin: 0 auto;
+        min-height: 100vh;
+        height: 100vh;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: clamp(48px, 8vw, 90px) 24px;
+        opacity: 0;
+        transform: translateY(60px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .page.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .page-content {
+        flex: 1;
+        overflow: visible;
+        width: 100%;
+      }
+
+      .hero {
+        position: relative;
+        text-align: center;
+        color: var(--text-light);
+        overflow: hidden;
+        background-image: linear-gradient(
+            135deg,
+            rgba(11, 8, 6, 0.35),
+            rgba(255, 154, 102, 0.25)
+          ),
+          url("./hero-cover.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at center,
+          rgba(242, 177, 56, 0.3),
+          rgba(0, 0, 0, 0.45)
+        );
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 7vw, 64px);
+        line-height: 1.2;
+        margin-bottom: 18px;
+        font-weight: 700;
+        color: #fff6ed;
+      }
+
+      .hero p {
+        font-size: clamp(16px, 2.8vw, 22px);
+        color: rgba(255, 243, 235, 0.9);
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        letter-spacing: 0.3em;
+        font-size: 14px;
+        color: rgba(60, 42, 32, 0.65);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      @media (min-width: 900px) {
+        .hero-content {
+          margin: 0 auto;
+        }
+      }
+
+      .nav-button {
+        margin-top: 48px;
+        margin-bottom: 24px;
+        align-self: center;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--accent);
+        padding: 14px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        position: relative;
+        z-index: 20; /* 确保按钮在弹幕上方，不会被遮挡 */
+        flex-shrink: 0;
+      }
+
+      .cta-section .nav-button {
+        position: sticky;
+        bottom: 24px;
+        margin-top: 32px;
+        margin-bottom: 0;
+        box-shadow: 0 8px 24px rgba(60, 42, 32, 0.25);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      .nav-button:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .nav-button .icon {
+        font-size: 18px;
+        animation: pulse 1.6s ease infinite;
+      }
+
+      .stats {
+        position: relative;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        overflow: hidden;
+      }
+
+      .stats-header {
+        text-align: center;
+        margin-bottom: 24px;
+        margin-top: -70px;
+      }
+
+      .stats-body {
+        text-align: left;
+        color: var(--text-dark);
+        line-height: 1.8;
+        margin-top: 20px;
+        margin-bottom: 32px;
+      }
+
+      .stats-body p {
+        margin-bottom: 18px;
+      }
+
+      .stats-illustration {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: min(630px, 70vw);
+        filter: drop-shadow(0 15px 35px rgba(60, 42, 32, 0.25));
+      }
+
+      .stats-illustration a {
+        display: block;
+        position: relative;
+      }
+
+      .stats-illustration img {
+        width: 100%;
+        height: auto;
+        border-radius: 18px 0 0 0;
+        display: block;
+      }
+
+      .stats-illustration.left {
+        right: auto;
+        left: 0;
+        width: min(630px, 60vw);
+        transform: translateY(-40px);
+        pointer-events: auto;
+      }
+
+      .stats-illustration.left img {
+        border-radius: 0 18px 0 0;
+      }
+
+      .cta-label {
+        position: absolute;
+        top: calc(100% - 30px);
+        left: calc(50% - 165px);
+        transform: translate(-50%, -18px);
+        background: rgba(244, 162, 97, 0.9);
+        color: #3c1f15;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        font-size: clamp(14px, 2vw, 18px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .stat-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(242, 107, 56, 0.15);
+        border: 1px solid rgba(242, 107, 56, 0.2);
+      }
+
+      .stat-title {
+        font-size: 14px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+
+      .stat-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-top: 8px;
+      }
+
+      .section-title {
+        font-size: 28px;
+        margin-bottom: 16px;
+        color: var(--accent);
+      }
+
+      .section-subtitle {
+        font-size: 16px;
+        color: var(--muted);
+        margin-bottom: 32px;
+      }
+
+      .section-lede {
+        font-size: 20px;
+        color: #7a4d33;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        font-weight: 600;
+      }
+
+      .section-subtitle--bold {
+        font-weight: 600;
+        color: #5a3b2b;
+        text-align: left;
+        margin-bottom: 24px;
+      }
+
+      .chart-section {
+        background: linear-gradient(135deg, #fbe0cb, #f4a261);
+        color: var(--text-dark);
+      }
+
+      .page.chart-section .page-content {
+        margin-top: -70px;
+      }
+
+      #trend-chart {
+        width: 100%;
+        height: 420px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.65);
+        box-shadow: inset 0 0 0 1px rgba(242, 107, 56, 0.15);
+        margin-top: 10px;
+      }
+
+      #comparison-chart {
+        width: 100%;
+        height: 420px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: inset 0 0 0 1px rgba(90, 59, 43, 0.12),
+          0 12px 28px rgba(90, 59, 43, 0.08);
+        margin-top: 28px;
+      }
+
+      .chart-analysis {
+        margin-top: 28px;
+        padding: 24px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.45);
+        color: #7a4d33;
+        line-height: 1.7;
+        box-shadow: 0 10px 30px rgba(122, 77, 51, 0.15);
+      }
+
+      .chart-analysis strong {
+        color: #b45309;
+      }
+
+      .timeline {
+        background: linear-gradient(135deg, #fff4ec, #ffe0d1);
+        color: var(--text-dark);
+      }
+
+      .page.timeline .section-title {
+        margin-top: -70px;
+      }
+
+      .page.timeline .nav-button {
+        margin-top: 28px;
+      }
+
+      .timeline-line {
+        position: relative;
+        margin: 32px 0;
+        padding-left: 24px;
+        border-left: 2px solid rgba(90, 59, 43, 0.2);
+      }
+
+      .timeline-item {
+        margin-bottom: 24px;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -30px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(242, 107, 56, 0.15);
+      }
+
+      .timeline-year {
+        font-weight: 600;
+        color: var(--accent-2);
+        margin-bottom: 6px;
+      }
+
+      .timeline-desc {
+        color: #5a3b2b;
+        line-height: 1.6;
+      }
+
+      .insight-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin-top: 32px;
+      }
+
+      .insight {
+        background: linear-gradient(135deg, #fff1e6, #ffd7ba);
+        color: #5a3b2b;
+        overflow: visible;
+      }
+
+      .page.insight .section-title {
+        margin-top: -70px;
+      }
+
+      .danmaku-container {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 5; /* 降低弹幕容器的z-index，确保按钮在弹幕上方 */
+        /* 确保弹幕不会超出容器 */
+        max-height: 200px;
+      }
+
+      .danmaku-track {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+      }
+
+      .danmaku-item {
+        position: absolute;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.92);
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        color: #5a3b2b;
+        box-shadow: 0 4px 15px rgba(90, 59, 43, 0.2);
+        border: 1px solid rgba(242, 107, 56, 0.25);
+        animation: danmaku-scroll linear;
+        font-weight: 500;
+        backdrop-filter: blur(10px);
+        will-change: transform;
+        left: 100%;
+        line-height: 1.4;
+        max-width: none;
+      }
+
+      @keyframes danmaku-scroll {
+        0% {
+          left: 100%;
+          transform: translateX(0);
+        }
+        100% {
+          left: 0;
+          transform: translateX(-100%);
+        }
+      }
+
+      .danmaku-item:nth-child(odd) {
+        background: rgba(255, 250, 244, 0.95);
+      }
+
+      .danmaku-item:nth-child(even) {
+        background: rgba(255, 245, 238, 0.95);
+      }
+
+      .danmaku-item:nth-child(3n) {
+        background: rgba(255, 240, 230, 0.95);
+      }
+
+      .opinion-gallery {
+        position: relative;
+        min-height: 380px;
+        max-height: 65vh;
+        overflow: visible;
+      }
+
+      .opinion-item {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .opinion-item:hover {
+        z-index: 1001;
+      }
+
+      .opinion-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 50%;
+        box-shadow: 0 15px 35px rgba(90, 59, 43, 0.18);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .opinion-item:hover img {
+        transform: translateY(-8px) scale(1.04);
+        box-shadow: 0 20px 40px rgba(90, 59, 43, 0.25);
+      }
+
+      .opinion-popup {
+        position: absolute;
+        top: calc(100% + 16px);
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        width: auto;
+        min-width: 300px;
+        max-width: min(600px, 90vw);
+        max-height: 80vh;
+        border-radius: 16px;
+        overflow: visible;
+        box-shadow: 0 20px 50px rgba(90, 59, 43, 0.3);
+        background: #fffaf4;
+        z-index: 99999;
+        padding: 0;
+      }
+
+      .opinion-popup::after {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: #fffaf4;
+        clip-path: polygon(50% 0, 0 100%, 100% 100%);
+        z-index: 100000;
+      }
+
+      .opinion-popup img {
+        width: auto;
+        max-width: 100%;
+        max-height: 80vh;
+        height: auto;
+        display: block;
+        border-radius: 16px;
+        object-fit: contain;
+      }
+
+      .opinion-item:hover .opinion-popup,
+      .opinion-item:focus-within .opinion-popup {
+        display: block;
+      }
+
+      @media (max-width: 700px) {
+        .opinion-popup {
+          width: min(85vw, 320px);
+          bottom: auto;
+          top: calc(100% + 16px);
+          transform: translateX(-50%) scale(0.95);
+        }
+
+        .opinion-popup::after {
+          top: -10px;
+          bottom: auto;
+          clip-path: polygon(50% 0, 0 100%, 100% 100%);
+        }
+
+        .opinion-item:hover .opinion-popup,
+        .opinion-item:focus-within .opinion-popup {
+          transform: translateX(-50%) scale(1);
+        }
+      }
+
+      .opinion-item:nth-child(1) {
+        top: 10px;
+        left: 3%;
+      }
+
+      .opinion-item:nth-child(2) {
+        top: 0;
+        left: 25%;
+      }
+
+      .opinion-item:nth-child(3) {
+        top: 25px;
+        left: 50%;
+      }
+
+      .opinion-item:nth-child(4) {
+        top: 5px;
+        right: 5%;
+      }
+
+      .opinion-item:nth-child(5) {
+        top: 150px;
+        left: 8%;
+      }
+
+      .opinion-item:nth-child(6) {
+        top: 140px;
+        left: 32%;
+      }
+
+      .opinion-item:nth-child(7) {
+        top: 160px;
+        left: 55%;
+      }
+
+      .opinion-item:nth-child(8) {
+        top: 145px;
+        right: 8%;
+      }
+
+      .opinion-item:nth-child(9) {
+        top: 280px;
+        left: 18%;
+      }
+
+      .opinion-item:nth-child(10) {
+        top: 290px;
+        right: 20%;
+      }
+
+      @media (max-width: 700px) {
+        .opinion-gallery {
+          min-height: auto;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 18px;
+        }
+
+        .opinion-item {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+        }
+      }
+
+      .insight-card {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .insight-card h4 {
+        margin-bottom: 12px;
+        color: var(--accent-3);
+        font-size: 18px;
+      }
+
+      .cta-section {
+        background: linear-gradient(120deg, #f26b38, #f2b138);
+        text-align: center;
+        color: var(--text-dark);
+        justify-content: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .cta-section .section-title {
+        margin-top: -70px;
+        color: #c6441e;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .cta-section .page-content {
+        padding-bottom: 120px;
+        min-height: auto;
+      }
+
+      .cta-section p {
+        margin: 16px auto 28px;
+        max-width: 560px;
+        color: rgba(60, 42, 32, 0.85);
+        line-height: 1.6;
+      }
+
+      .cta-content {
+        max-width: 720px;
+        margin: 0 auto 40px;
+        text-align: left;
+      }
+
+      .cta-intro {
+        font-size: 18px;
+        line-height: 1.8;
+        color: rgba(60, 42, 32, 0.9);
+        margin-bottom: 24px;
+        font-weight: 500;
+      }
+
+      .cta-subsection {
+        margin-bottom: 24px;
+      }
+
+      .cta-subtitle {
+        font-size: 20px;
+        font-weight: 700;
+        color: #8b4513;
+        margin-bottom: 16px;
+        padding-left: 16px;
+        border-left: 4px solid #f26b38;
+        line-height: 1.4;
+      }
+
+      .cta-text {
+        font-size: 16px;
+        line-height: 1.85;
+        color: rgba(60, 42, 32, 0.88);
+        margin-bottom: 20px;
+        text-align: justify;
+      }
+
+      .cta-highlight {
+        background: rgba(255, 255, 255, 0.4);
+        padding: 20px 24px;
+        border-radius: 16px;
+        margin: 24px 0;
+        border-left: 4px solid #f2b138;
+        box-shadow: 0 4px 12px rgba(60, 42, 32, 0.1);
+      }
+
+      .cta-highlight p {
+        margin: 0 0 12px 0;
+        font-size: 16px;
+        line-height: 1.8;
+        color: rgba(60, 42, 32, 0.9);
+      }
+
+      .cta-highlight p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cta-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+      }
+
+      .cta-list li {
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, 0.35);
+        border-radius: 12px;
+        font-size: 16px;
+        line-height: 1.7;
+        color: rgba(60, 42, 32, 0.9);
+        border-left: 3px solid #f26b38;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-list li:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 12px rgba(60, 42, 32, 0.15);
+      }
+
+      .cta-list li::before {
+        content: "→";
+        color: #f26b38;
+        font-weight: bold;
+        margin-right: 12px;
+        font-size: 18px;
+      }
+
+      .cta-conclusion {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 248, 240, 0.6));
+        padding: 24px 28px;
+        border-radius: 18px;
+        margin-top: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        box-shadow: 0 6px 20px rgba(60, 42, 32, 0.12);
+        border: 1px solid rgba(242, 107, 56, 0.2);
+      }
+
+      .cta-conclusion p {
+        margin: 0;
+        font-size: 17px;
+        line-height: 1.8;
+        color: rgba(60, 42, 32, 0.95);
+        font-weight: 500;
+      }
+
+      @media (max-width: 600px) {
+        .cta-content {
+          max-width: 100%;
+          padding: 0 8px;
+        }
+
+        .cta-intro {
+          font-size: 16px;
+        }
+
+        .cta-subtitle {
+          font-size: 18px;
+        }
+
+        .cta-text {
+          font-size: 15px;
+        }
+
+        .cta-highlight {
+          padding: 20px;
+        }
+
+        .cta-list li {
+          font-size: 15px;
+          padding: 14px 16px;
+        }
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        border-radius: 999px;
+        background: #fff6ef;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        box-shadow: 0 15px 30px rgba(60, 42, 32, 0.15);
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 32px 16px 48px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          padding: 48px 18px;
+        }
+
+        .stat-value {
+          font-size: 26px;
+        }
+      }
+
+      .pagination-dots {
+        position: fixed;
+        right: 36px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 5;
+      }
+
+      .pagination-dots button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: transparent;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .pagination-dots button.active {
+        background: var(--accent-2);
+        border-color: var(--accent-2);
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 640px) {
+        .pagination-dots {
+          right: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pagination-dots" aria-hidden="true"></div>
+    <main>
+      <section class="page hero" data-page="0">
+        <div class="hero-content page-content">
+          <p class="eyebrow">数据新闻 H5｜2025</p>
+          <h1>看见婚姻温度</h1>
+          <p>无需户口本，婚姻登记全国通办！</p>
+        </div>
+        <button class="nav-button next-btn" data-label="下滑探索">
+          <span>下滑探索</span>
+          <span class="icon">↓</span>
+        </button>
+      </section>
+
+      <section class="page stats" data-page="1">
+        <div class="page-content">
+          <header class="stats-header">
+            <h2 class="section-title">背景速览</h2>
+            <p class="section-lede">
+              2025年4月6日，国务院总理李强签署第804号国务院令，公布修订后的《婚姻登记条例》（以下简称《条例》），自2025年5月10日起施行。
+            </p>
+          </header>
+          <div class="stats-body">
+            <p class="section-subtitle section-subtitle--bold">
+              4月6日，司法部、民政部负责人就《条例》的修订背景回答了记者提问：
+            </p>
+            <p class="section-subtitle">
+              党中央、国务院高度重视婚姻家庭工作。习近平总书记强调，要重视家庭文明建设，注重家庭、注重家教、注重家风，促进家庭和谐，使千千万万个家庭成为国家发展、民族进步、社会和谐的重要基点；要积极培育新型婚育文化，加强对年轻人婚恋观、生育观、家庭观的引导。现行《条例》自2003年10月1日施行以来，对规范婚姻登记工作、保障婚姻制度实施、保护婚姻当事人合法权益发挥了重要作用。近年来，婚姻登记领域出现了一些新情况新需求。党中央、国务院出台一系列关于加强家庭家教家风建设的政策文件，对婚姻登记工作提出新要求，需要在《条例》中加以落实。自2021年6月起，经国务院批准，全国陆续有21个省（自治区、直辖市）开展了两轮婚姻登记“跨省通办”试点，试点将于今年5月结束，需要将改革成果明确为法律制度。因此，有必要对现行《条例》作出修订。
+            </p>
+          </div>
+        </div>
+        <figure class="stats-illustration" aria-hidden="true">
+          <img
+            src="./生成带有老式电视机的图片.png"
+            alt="电视机与婚姻政策新闻插画"
+          />
+        </figure>
+        <figure class="stats-illustration left">
+          <a href="./序列1.mp4" target="_blank" aria-label="播放相关视频">
+            <img
+              src="./老式电视机的图片.png"
+              alt="老式电视机静物插画"
+            />
+            <span class="cta-label">点击观看</span>
+          </a>
+        </figure>
+        <div class="stats-grid" aria-label="待补充数据模块"></div>
+        <button class="nav-button next-btn">
+          <span>继续了解趋势</span>
+          <span class="icon">↓</span>
+        </button>
+      </section>
+
+      <section class="page chart-section" data-page="2">
+        <div class="page-content">
+          <h2 class="section-title">趋势曲线</h2>
+          <div class="chart-analysis">
+            <p>
+              2015-2023 年间，<strong>结婚登记总体呈阶梯式下行</strong>，从 2015 年的 1244.71 万对滑落到
+              2023 年的 768.21 万对，仅 2023 年因多地鼓励政策短暂回升，2024 年再度降至
+              610.6 万对、2025 年前三季度为 515.2 万对，说明婚育意愿仍待提振。
+            </p>
+            <p>
+              <strong>离婚登记在 2019 年触顶后快速回落</strong>，2019 年达到 470.06 万对，2021 年降至
+              283.93 万对，与婚姻登记“冷静期”、疫情等因素相关，此后保持在 200-360 万对区间。
+            </p>
+            <p>
+              综合来看，离结比在 2020 年后明显收窄，结婚与离婚双双回落，但结婚降幅更大——
+              <strong>婚姻关系整体进入“缩量期”</strong>。这也凸显出加快完善跨省通办、优化婚姻服务与培育新型婚育文化的重要性。
+            </p>
+          </div>
+          <div id="trend-chart"></div>
+        </div>
+        <button class="nav-button next-btn">
+          <span>查看关键节点</span>
+          <span class="icon">↓</span>
+        </button>
+      </section>
+
+      <section class="page timeline" data-page="3">
+        <div class="page-content">
+          <h2 class="section-title">横向对比</h2>
+          <p class="section-subtitle section-subtitle--bold">
+            2024 与 2025 年前三季度结婚、离婚登记对比
+          </p>
+          <p class="section-subtitle">
+            通过簇状柱状图，可交互查看同季度不同年份、不同登记类型的量级差异，观察
+            H5 数据故事中的节奏节点。
+          </p>
+          <div id="comparison-chart" role="img" aria-label="2024 与 2025 年前三季度结婚与离婚登记簇状柱状图"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-desc analysis-copy">
+            2025 年 5 月 10 日新版《婚姻登记条例》正式实施，“无需户口本、跨省通办”大幅降低登记门槛。从簇状柱状图看，2025 年第一季度
+            <strong>结婚登记跃升至 181 万对</strong>，较 2024 年同期的 196.9 万对虽仍略低，但随后两季维持在
+            172.9 万对与 161.3 万对，跌幅明显放缓，说明政策利好正在托底结婚需求。离婚登记方面，2025 年前三季度分别为 63、70.1、74.6 万对，整体与
+            2024 年同期（57.3、70.1、69.3 万对）贴近，仅第三季度略有抬头，显示“先登记后冷静”机制和跨省办理便利化并未诱发集中离婚，反而让城市间流动人群更平滑地处理婚姻关系。综合来看，
+            <strong>政策主要激发的是新增结婚动能</strong>，离婚保持稳定，离结比改善有助于婚姻结构从“缩量期”向“稳量期”过渡。
+          </div>
+        </div>
+        <button class="nav-button next-btn">
+          <span>深入人群故事</span>
+          <span class="icon">↓</span>
+        </button>
+      </section>
+
+      <section class="page insight" data-page="4">
+        <div class="page-content">
+          <h2 class="section-title">群众反映</h2>
+          <p class="section-subtitle">
+            呈现各大媒体平台官方账号视频下网民的看法。
+          </p>
+          <div class="opinion-gallery" aria-label="网民观点头像展示">
+            <div class="opinion-item" aria-label="观点 1" tabindex="0">
+              <img src="./1.jpg" alt="网友头像 1" />
+              <div class="opinion-popup">
+                <img alt="观点截图 1" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 2" tabindex="0">
+              <img src="./2.jpg" alt="网友头像 2" />
+              <div class="opinion-popup">
+                <img alt="观点截图 2" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 3" tabindex="0">
+              <img src="./3.jpg" alt="网友头像 3" />
+              <div class="opinion-popup">
+                <img alt="观点截图 3" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 4" tabindex="0">
+              <img src="./4.jpg" alt="网友头像 4" />
+              <div class="opinion-popup">
+                <img alt="观点截图 4" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 5" tabindex="0">
+              <img src="./5.jpg" alt="网友头像 5" />
+              <div class="opinion-popup">
+                <img alt="观点截图 5" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 6" tabindex="0">
+              <img src="./6.jpg" alt="网友头像 6" />
+              <div class="opinion-popup">
+                <img alt="观点截图 6" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 7" tabindex="0">
+              <img src="./7.jpg" alt="网友头像 7" />
+              <div class="opinion-popup">
+                <img alt="观点截图 7" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 8" tabindex="0">
+              <img src="./8.jpg" alt="网友头像 8" />
+              <div class="opinion-popup">
+                <img alt="观点截图 8" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 9" tabindex="0">
+              <img src="./9.jpg" alt="网友头像 9" />
+              <div class="opinion-popup">
+                <img alt="观点截图 9" />
+              </div>
+            </div>
+            <div class="opinion-item" aria-label="观点 10" tabindex="0">
+              <img src="./10.jpg" alt="网友头像 10" />
+              <div class="opinion-popup">
+                <img alt="观点截图 10" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="nav-button next-btn">
+          <span>尾页总结</span>
+          <span class="icon">↓</span>
+        </button>
+        <div class="danmaku-container" aria-hidden="true"></div>
+      </section>
+
+      <section class="page cta-section" data-page="5">
+        <div class="page-content">
+          <h2 class="section-title">从"程序减负"到"幸福加分"</h2>
+          <div class="cta-content">
+            <p class="cta-intro">
+              当我们翻阅近十年的婚姻数据曲线，看到的是社会变迁的脉搏；而聚焦2024与2025年的季度对比，我们捕捉到的，则是一纸新规落地后，激起的真实涟漪。
+            </p>
+
+            <div class="cta-subsection">
+              <h3 class="cta-subtitle">数据告诉我们一个"简化"的故事</h3>
+              <p class="cta-text">
+                新的《婚姻登记条例》移开了"户口本"这道程序上的门槛。数据显示，条例颁布后，结婚登记人数出现了值得关注的波动。这不仅仅是数字的变化，更是成千上万个体，特别是身处异地、或面临家庭沟通阻碍的年轻人，迈向婚姻殿堂的路径被"拓宽"与"照亮"的证明。结婚，正从一道需要多方盖章的"家庭事务"，逐步回归为两个独立个体基于意愿的"个人选择"。
+              </p>
+            </div>
+
+            <div class="cta-subsection">
+              <h3 class="cta-subtitle">但数据也提醒我们一个"复杂"的真相</h3>
+              <p class="cta-text">
+                与此同时，离婚登记人数的趋势，依然沿着其固有的轨迹运行。这清晰地告诉我们：程序的便利，并未撼动婚姻内核的重量。人们不会因为结婚变容易而草率结合，同样，也不会因为离婚程序的冷静期等规定而轻易放弃对不幸婚姻的解脱。
+              </p>
+            </div>
+
+            <div class="cta-highlight">
+              <p><strong>我们的发现：</strong></p>
+              <p>
+                这本新《条例》，与其说是一场颠覆，不如说是一次"松绑"。它松绑的是形式，而非责任；它简化的是流程，而非情感。
+              </p>
+            </div>
+
+            <div class="cta-subsection">
+              <p class="cta-text" style="margin-bottom: 16px; font-weight: 600; color: rgba(60, 42, 32, 0.95);">
+                它所带来的深远影响，或许不在于结婚总量的剧烈攀升，而在于：
+              </p>
+              <ul class="cta-list">
+                <li>让"想结"和"能结"之间的距离更近。</li>
+                <li>让婚姻的起点，更多地回归于"我们相爱且自愿"。</li>
+              </ul>
+            </div>
+
+            <div class="cta-conclusion">
+              <p>它标志着社会治理对个人选择的尊重更进一步。</p>
+            </div>
+          </div>
+        </div>
+        <button class="nav-button next-btn" data-loop="true">
+          <span>回到首页</span>
+          <span class="icon">↑</span>
+        </button>
+      </section>
+    </main>
+
+    <footer>© 2025 婚姻温度数据新闻 · 预览版框架</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script>
+      const charts = [];
+
+      const trendChartDom = document.getElementById("trend-chart");
+      if (trendChartDom) {
+        const trendChart = echarts.init(trendChartDom);
+        charts.push(trendChart);
+
+        const placeholderYears = [
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025前三季度",
+        ];
+
+        const trendOption = {
+          backgroundColor: "transparent",
+          tooltip: { trigger: "axis" },
+          legend: {
+            data: ["结婚登记", "离婚登记"],
+            textStyle: { color: "#7a4d33" },
+          },
+          grid: { top: 50, left: 40, right: 20, bottom: 40 },
+          xAxis: {
+            type: "category",
+            data: placeholderYears,
+            axisLine: { lineStyle: { color: "#c98252" } },
+            axisLabel: { color: "#7a4d33" },
+          },
+          yAxis: {
+            type: "value",
+            name: "万对",
+            nameTextStyle: {
+              color: "#7a4d33",
+              padding: [0, 0, 10, -30],
+            },
+            axisLine: { show: false },
+            splitLine: {
+              lineStyle: { color: "rgba(122, 77, 51, 0.2)" },
+            },
+            axisLabel: { color: "#7a4d33" },
+          },
+          series: [
+            {
+              name: "结婚登记",
+              type: "line",
+              smooth: true,
+              data: [1244.71, 1142.82, 1063.1, 1013.94, 927.33, 814.33, 764.3, 683.5, 768.21, 610.6, 515.2],
+              lineStyle: { width: 4, color: "#f26b38" },
+              areaStyle: {
+                color: "rgba(242, 107, 56, 0.25)",
+              },
+            },
+            {
+              name: "离婚登记",
+              type: "line",
+              smooth: true,
+              data: [384.14, 415.82, 437.4, 446.08, 470.06, 433.9, 283.93, 287.92, 360.53, 262.1, 207.7],
+              lineStyle: { width: 4, color: "#d95c8a" },
+              areaStyle: {
+                color: "rgba(217, 92, 138, 0.25)",
+              },
+            },
+          ],
+        };
+
+        trendChart.setOption(trendOption);
+      }
+
+      const comparisonDom = document.getElementById("comparison-chart");
+      if (comparisonDom) {
+        const comparisonChart = echarts.init(comparisonDom);
+        charts.push(comparisonChart);
+
+        const quarterLabels = ["第一季度", "第二季度", "第三季度"];
+        const comparisonOption = {
+          backgroundColor: "transparent",
+          tooltip: {
+            trigger: "axis",
+            axisPointer: { type: "shadow" },
+          },
+          legend: {
+            data: [
+              "2024 结婚登记",
+              "2024 离婚登记",
+              "2025 结婚登记",
+              "2025 离婚登记",
+            ],
+            textStyle: { color: "#5a3b2b" },
+            top: 10,
+          },
+          grid: { top: 80, left: 40, right: 20, bottom: 40 },
+          xAxis: {
+            type: "category",
+            data: quarterLabels,
+            axisLine: { lineStyle: { color: "#c98252" } },
+            axisLabel: { color: "#7a4d33" },
+          },
+          yAxis: {
+            type: "value",
+            name: "万对",
+            nameTextStyle: { color: "#7a4d33" },
+            splitLine: {
+              lineStyle: { color: "rgba(90, 59, 43, 0.15)" },
+            },
+            axisLabel: { color: "#7a4d33" },
+          },
+          series: [
+            {
+              name: "2024 结婚登记",
+              type: "bar",
+              data: [196.9, 146.1, 131.7],
+              itemStyle: { color: "#f26b38" },
+              barGap: 0,
+              emphasis: { focus: "series" },
+              animationDuration: 1200,
+            },
+            {
+              name: "2024 离婚登记",
+              type: "bar",
+              data: [57.3, 70.1, 69.3],
+              itemStyle: { color: "#d95c8a" },
+              emphasis: { focus: "series" },
+              animationDuration: 1200,
+              animationDelay: (idx) => idx * 80 + 100,
+            },
+            {
+              name: "2025 结婚登记",
+              type: "bar",
+              data: [181, 172.9, 161.3],
+              itemStyle: { color: "#f2b138" },
+              emphasis: { focus: "series" },
+              animationDuration: 1200,
+              animationDelay: (idx) => idx * 80 + 200,
+            },
+            {
+              name: "2025 离婚登记",
+              type: "bar",
+              data: [63, 70.1, 74.6],
+              itemStyle: { color: "#a45a93" },
+              emphasis: { focus: "series" },
+              animationDuration: 1200,
+              animationDelay: (idx) => idx * 80 + 300,
+            },
+          ],
+          animationEasing: "cubicOut",
+        };
+
+        comparisonChart.setOption(comparisonOption);
+      }
+
+      const resizeCharts = () => {
+        charts.forEach((instance) => instance.resize());
+      };
+
+      window.addEventListener("resize", resizeCharts);
+
+      // 分页交互
+      const pages = Array.from(document.querySelectorAll(".page"));
+      const dotsContainer = document.querySelector(".pagination-dots");
+      let currentPage = 0;
+      let wheelLocked = false;
+
+      const renderDots = () => {
+        dotsContainer.innerHTML = "";
+        pages.forEach((_, idx) => {
+          const dot = document.createElement("button");
+          dot.setAttribute("aria-label", `前往第 ${idx + 1} 屏`);
+          dot.addEventListener("click", () => showPage(idx));
+          dotsContainer.appendChild(dot);
+        });
+      };
+
+      const updateActiveDot = () => {
+        dotsContainer.querySelectorAll("button").forEach((btn, idx) => {
+          btn.classList.toggle("active", idx === currentPage);
+        });
+      };
+
+      const showPage = (idx) => {
+        if (idx < 0 || idx >= pages.length) return;
+        pages[currentPage].classList.remove("active");
+        
+        // 如果离开insight页面，停止弹幕
+        if (pages[currentPage].classList.contains("insight")) {
+          stopDanmaku();
+        }
+        
+        currentPage = idx;
+        pages[currentPage].classList.add("active");
+        updateActiveDot();
+        
+        // 如果进入insight页面（data-page="4"），启动弹幕
+        const isInsightPage = pages[currentPage].getAttribute("data-page") === "4" || 
+                             pages[currentPage].classList.contains("insight");
+        if (isInsightPage) {
+          // 立即启动弹幕，不延迟
+          // 使用setTimeout 0确保在DOM更新后执行
+          setTimeout(() => {
+            initDanmaku();
+          }, 50);
+        }
+        
+        if (
+          pages[currentPage].querySelector("#trend-chart") ||
+          pages[currentPage].querySelector("#comparison-chart")
+        ) {
+          requestAnimationFrame(resizeCharts);
+        }
+      };
+
+      const nextPage = () => {
+        if (currentPage < pages.length - 1) {
+          showPage(currentPage + 1);
+        } else {
+          showPage(0);
+        }
+      };
+
+      const prevPage = () => {
+        if (currentPage > 0) {
+          showPage(currentPage - 1);
+        }
+      };
+
+      const handleWheel = (event) => {
+        // 检查是否在最后一页（cta-section，data-page="5"）
+        const isLastPage = currentPage === pages.length - 1;
+        const lastPageElement = pages[currentPage];
+        const isCtaSection = lastPageElement && lastPageElement.classList.contains("cta-section");
+        
+        if (isLastPage && isCtaSection) {
+          // 在最后一页时，检查是否已经滚动到底部
+          const scrollTop = lastPageElement.scrollTop;
+          const scrollHeight = lastPageElement.scrollHeight;
+          const clientHeight = lastPageElement.clientHeight;
+          const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10; // 10px 容差
+          
+          // 如果向下滚动且还没到底部，允许页面正常滚动
+          if (event.deltaY > 0 && !isAtBottom) {
+            // 不阻止默认行为，允许页面滚动
+            return;
+          }
+          
+          // 如果向上滚动，允许页面正常滚动
+          if (event.deltaY < 0) {
+            return;
+          }
+          
+          // 如果已经到底部且继续向下滚动，才触发翻页回到首页
+          if (event.deltaY > 0 && isAtBottom) {
+            event.preventDefault();
+            if (wheelLocked) return;
+            wheelLocked = true;
+            showPage(0); // 回到首页
+            setTimeout(() => {
+              wheelLocked = false;
+            }, 800);
+            return;
+          }
+        }
+        
+        // 其他页面的正常翻页逻辑
+        event.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        if (event.deltaY > 0) {
+          nextPage();
+        } else {
+          prevPage();
+        }
+        setTimeout(() => {
+          wheelLocked = false;
+        }, 800);
+      };
+
+      const setupTouch = () => {
+        let startY = 0;
+        let endY = 0;
+        window.addEventListener(
+          "touchstart",
+          (e) => {
+            startY = e.touches[0].clientY;
+          },
+          { passive: true }
+        );
+        window.addEventListener(
+          "touchend",
+          (e) => {
+            endY = e.changedTouches[0].clientY;
+            const diff = endY - startY;
+            if (Math.abs(diff) < 50) return;
+            if (diff < 0) {
+              nextPage();
+            } else {
+              prevPage();
+            }
+          },
+          { passive: true }
+        );
+      };
+
+      document.querySelectorAll(".next-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (btn.dataset.loop) {
+            showPage(0);
+          } else {
+            nextPage();
+          }
+        });
+      });
+
+      renderDots();
+      pages[0].classList.add("active");
+      updateActiveDot();
+      window.addEventListener("wheel", handleWheel, { passive: false });
+      setupTouch();
+
+      // 弹窗控制和图片路径设置
+      document.addEventListener("DOMContentLoaded", () => {
+        const opinionItems = document.querySelectorAll(".opinion-item");
+        const imageNames = ["1(2).jpg", "2(2).jpg", "3(2).jpg", "4(2).jpg", "5(2).jpg", 
+                           "6(2).jpg", "7(2).jpg", "8(2).jpg", "9(2).jpg", "10(2).jpg"];
+        
+        opinionItems.forEach((item, index) => {
+          const popup = item.querySelector(".opinion-popup");
+          const popupImg = popup ? popup.querySelector("img") : null;
+          
+          if (popupImg && imageNames[index]) {
+            // 设置图片路径，使用URL编码确保特殊字符正确处理
+            const imageName = imageNames[index];
+            popupImg.src = "./" + imageName;
+            
+            // 添加错误处理，如果直接路径失败，尝试URL编码
+            popupImg.onerror = function() {
+              console.log("尝试加载图片:", this.src);
+              const encodedName = encodeURIComponent(imageName);
+              this.src = "./" + encodedName;
+              this.onerror = function() {
+                console.error("图片加载失败:", imageName);
+              };
+            };
+          }
+          
+          if (popup) {
+            item.addEventListener("mouseenter", () => {
+              popup.style.display = "block";
+              // 等待一帧，确保弹窗已渲染
+              requestAnimationFrame(() => {
+                const rect = popup.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // 检查右边界
+                if (rect.right > viewportWidth) {
+                  popup.style.left = "auto";
+                  popup.style.right = "0";
+                  popup.style.transform = "translateX(0)";
+                }
+                // 检查左边界
+                else if (rect.left < 0) {
+                  popup.style.left = "0";
+                  popup.style.transform = "translateX(0)";
+                }
+                
+                // 检查下边界，如果超出则显示在上方
+                if (rect.bottom > viewportHeight) {
+                  popup.style.top = "auto";
+                  popup.style.bottom = "calc(100% + 16px)";
+                }
+              });
+            });
+            item.addEventListener("mouseleave", () => {
+              popup.style.display = "none";
+              // 重置位置
+              popup.style.left = "50%";
+              popup.style.right = "auto";
+              popup.style.top = "calc(100% + 16px)";
+              popup.style.bottom = "auto";
+              popup.style.transform = "translateX(-50%)";
+            });
+          }
+        });
+      });
+
+      // 弹幕初始化
+      const danmakuTexts = [
+        "@☆贝蒂🔆Be€Ky☆: 干脆弄个扫一扫注册一下就结",
+        "@😀🔍🤡: 人们不结婚是因为流程繁琐吗",
+        "@涂涂麻麻: 建议更加严格才行，户口本，体检报告，征信报告，无犯罪记录",
+        "@呗呗兔: 没离婚再结婚怎么判",
+        "@日落收藏家☀️: 为了高质量婚姻，建议更加严格才行，户口本，体检报告，征信报告，无犯罪记录",
+        "@小小: 昨天刚去民政局申请离婚 但愿没变数 下月6.10拿证 七年牢狱",
+        "@椿椿爱吃香椿: 这么便利了 520肯定要彻夜排队了",
+        "@念₍˄·͈༝·͈˄*₎◞ ̑̑: 感觉结婚越来越简单，离婚反而还有点难了",
+        "@兄弟梓叔: 取消结婚证离婚证吧，直接在身份证上显示就好了",
+        "@不必理会: 可以再方便一点？在微信小程序登记就好了吗？",
+        "@时年三六: 挺好 方便     30天取消了更好",
+        "@呀呀乐: 这离婚率更高了",
+        "@十二S: 整个APP吧，最好都不用到场",
+        "@用户8885504663150: 除了些年轻上头的，现在结婚的太少了",
+        "@小苏: 相当于结婚生孩子离婚极速版了",
+        "@L.L: 这样会不会冲动结婚的多了，随之而来的后悔离婚也增多",
+        "@一禾家: 这不是出去旅个游，就能结婚了",
+        "@燕儿000382: 这是越来越方便了，随时随地结婚离婚",
+        "@无理取闹: 没有彩礼了，起床赶紧结婚去吧",
+        "@Ccy🦋: 我觉得结婚可以本人到场，图个喜庆，离婚就不必了吧，手机上申请一下，时间到了把证寄到手就行",
+        "@销声: 以后不用偷户口本了",
+        "@詹詹的taco: 那不就是不用见老丈人了呗",
+        "@小玥宝贝吖🍵: 结婚比办个银行卡都简单",
+        "@🥇提米吖: 应该更新身份证，增加配偶那一栏",
+        "@同在路上: 身份证我带了，请问对象哪里领？"
+      ];
+
+      // 检查两个边界框是否重叠（考虑安全间距）
+      function checkBoundaryOverlap(box1, box2, safetyMargin = 50) {
+        // box格式: { left, right, top, bottom }
+        // 检查是否有重叠（考虑安全边距）
+        // 增加安全间距到50px，确保弹幕之间有明显的视觉分离，不会遮挡内容
+        // 只有当水平和垂直方向都重叠时，才认为有重叠
+        const horizontalOverlap = !(box1.right + safetyMargin < box2.left || box1.left > box2.right + safetyMargin);
+        const verticalOverlap = !(box1.bottom + safetyMargin < box2.top || box1.top > box2.bottom + safetyMargin);
+        
+        return horizontalOverlap && verticalOverlap;
+      }
+
+      // 计算弹幕在某个时间点的水平位置
+      function getDanmakuHorizontalPosition(danmakuInfo, currentTime) {
+        const elapsed = (currentTime - danmakuInfo.startTime) / 1000; // 秒
+        if (elapsed < 0) return window.innerWidth; // 还没开始
+        
+        const totalDistance = window.innerWidth + danmakuInfo.width;
+        const speed = totalDistance / danmakuInfo.duration; // 像素/秒
+        const distanceMoved = speed * elapsed;
+        
+        // 从右侧（100%）开始，向左移动
+        return window.innerWidth - distanceMoved;
+      }
+
+      // 检查新弹幕是否会与现有弹幕重叠（检查整个动画过程中的潜在碰撞）
+      function checkCollisionWithAllDanmakus(newBox, currentTime, excludeId = null, newDanmakuInfo = null) {
+        for (const activeDanmaku of allActiveDanmakus) {
+          if (excludeId && activeDanmaku.id === excludeId) continue;
+          
+          // 计算现有弹幕的当前水平位置
+          const currentLeft = getDanmakuHorizontalPosition(activeDanmaku, currentTime);
+          const currentRight = currentLeft + activeDanmaku.width;
+          
+          // 如果弹幕已经移出屏幕，跳过
+          if (currentRight < -50) continue;
+          
+          // 构建现有弹幕的边界框
+          const existingBox = {
+            left: currentLeft,
+            right: currentRight,
+            top: activeDanmaku.top,
+            bottom: activeDanmaku.top + activeDanmaku.height
+          };
+          
+          // 检查是否重叠（使用更大的安全间距50px）
+          if (checkBoundaryOverlap(newBox, existingBox, 50)) {
+            return true; // 发现重叠
+          }
+          
+          // 如果提供了新弹幕信息，检查整个动画过程中的潜在碰撞
+          if (newDanmakuInfo) {
+            // 检查新弹幕移动过程中是否会与现有弹幕重叠
+            const checkPoints = 10; // 检查10个时间点
+            for (let i = 0; i <= checkPoints; i++) {
+              const checkTime = currentTime + (newDanmakuInfo.duration / checkPoints) * i * 1000;
+              const newLeft = getDanmakuHorizontalPosition(newDanmakuInfo, checkTime);
+              const newRight = newLeft + newDanmakuInfo.width;
+              
+              // 如果新弹幕已经移出屏幕，停止检查
+              if (newRight < -50) break;
+              
+              const futureNewBox = {
+                left: newLeft,
+                right: newRight,
+                top: newBox.top,
+                bottom: newBox.bottom
+              };
+              
+              const futureExistingLeft = getDanmakuHorizontalPosition(activeDanmaku, checkTime);
+              const futureExistingRight = futureExistingLeft + activeDanmaku.width;
+              
+              // 如果现有弹幕已经移出屏幕，跳过
+              if (futureExistingRight < -50) continue;
+              
+              const futureExistingBox = {
+                left: futureExistingLeft,
+                right: futureExistingRight,
+                top: existingBox.top,
+                bottom: existingBox.bottom
+              };
+              
+              if (checkBoundaryOverlap(futureNewBox, futureExistingBox, 50)) {
+                return true; // 在动画过程中发现潜在重叠
+              }
+            }
+          }
+        }
+        return false; // 没有重叠
+      }
+
+      function createDanmaku(text, trackIndex, delay, container) {
+        if (!container) {
+          const insightPage = document.querySelector('.page.insight');
+          if (!insightPage) return;
+          container = insightPage.querySelector(".danmaku-container");
+          if (!container) return;
+        }
+
+        const danmaku = document.createElement("div");
+        danmaku.className = "danmaku-item";
+        danmaku.textContent = text;
+        
+        // 先添加到DOM以获取实际尺寸（但先隐藏）
+        danmaku.style.visibility = "hidden";
+        danmaku.style.position = "absolute";
+        container.appendChild(danmaku);
+        const danmakuWidth = danmaku.offsetWidth;
+        const danmakuHeight = danmaku.offsetHeight;
+        
+        const now = Date.now();
+        
+        // 清理已结束的弹幕记录（更严格地清理）
+        allActiveDanmakus = allActiveDanmakus.filter(item => {
+          const elapsed = (now - item.startTime) / 1000;
+          // 只保留还在屏幕上的弹幕（动画时间+1秒缓冲即可）
+          return elapsed < item.duration + 1;
+        });
+        
+        // 同时清理trackLastDanmaku中过期的记录
+        for (const trackIdx in trackLastDanmaku) {
+          const lastDanmaku = trackLastDanmaku[trackIdx];
+          const elapsed = (now - lastDanmaku.time) / 1000;
+          if (elapsed > lastDanmaku.duration + 2) {
+            // 如果弹幕已经完全移出屏幕，清除记录
+            delete trackLastDanmaku[trackIdx];
+          }
+        }
+        
+        // 根据文本长度调整动画速度
+        const textLength = text.length;
+        const baseDuration = 18;
+        const duration = baseDuration + (textLength / 20) * 3;
+        
+        // 计算与前面弹幕的水平间隔（更严格的检查）
+        const lastDanmaku = trackLastDanmaku[trackIndex];
+        if (lastDanmaku) {
+          const timeSinceLast = (now - lastDanmaku.time) / 1000;
+          const lastDuration = lastDanmaku.duration;
+          const lastWidth = lastDanmaku.width;
+          
+          // 首先检查时间间隔（最严格的要求）
+          const minTimeInterval = 15; // 同一轨道上弹幕之间至少间隔15秒
+          if (timeSinceLast < minTimeInterval) {
+            const additionalTimeDelay = minTimeInterval - timeSinceLast;
+            delay = Math.max(delay, additionalTimeDelay);
+            // 更新timeSinceLast用于后续计算
+            const adjustedTimeSinceLast = timeSinceLast + additionalTimeDelay;
+            
+            // 然后检查水平间距
+            const totalDistance = window.innerWidth + lastWidth;
+            const speed = totalDistance / lastDuration;
+            const distanceMoved = speed * adjustedTimeSinceLast;
+            
+            const minGap = 1200; // 增加水平最小间距到1200px
+            const requiredGap = lastWidth + minGap;
+            
+            if (distanceMoved < requiredGap) {
+              const neededDistance = requiredGap - distanceMoved;
+              const additionalDelay = neededDistance / speed;
+              delay = Math.max(delay, additionalTimeDelay + additionalDelay);
+            }
+          } else {
+            // 如果时间间隔足够，检查水平间距
+            const totalDistance = window.innerWidth + lastWidth;
+            const speed = totalDistance / lastDuration;
+            const distanceMoved = speed * timeSinceLast;
+            
+            const minGap = 1200; // 增加水平最小间距到1200px
+            const requiredGap = lastWidth + minGap;
+            
+            if (distanceMoved < requiredGap) {
+              const neededDistance = requiredGap - distanceMoved;
+              const additionalDelay = neededDistance / speed;
+              delay = Math.max(delay, additionalDelay);
+            }
+          }
+        }
+        
+        // 固定三行轨道，每行固定位置
+        const containerHeight = container.offsetHeight;
+        const safetyMargin = 50; // 边界安全间距
+        const minTop = 20; // 最小顶部位置
+        const maxBottom = containerHeight - 10; // 最大底部位置（留10px边距）
+        
+        // 固定三条轨道的位置（均匀分布）
+        const trackCount = 3;
+        const availableHeight = maxBottom - minTop - danmakuHeight;
+        const trackSpacing = availableHeight / (trackCount - 1);
+        
+        // 固定垂直位置：第一条轨道在顶部，第二条在中间，第三条在底部附近
+        let verticalPosition = minTop + (trackIndex * trackSpacing);
+        
+        // 确保不会超出容器
+        verticalPosition = Math.max(minTop, Math.min(verticalPosition, maxBottom - danmakuHeight));
+        let foundPosition = false;
+        let maxAttempts = 100; // 增加尝试次数到100次
+        let attempts = 0;
+        
+        // 计算新弹幕在开始时的水平位置
+        const startLeft = window.innerWidth;
+        const startRight = startLeft + danmakuWidth;
+        
+        // 首先检查初始位置是否在容器范围内
+        if (verticalPosition + danmakuHeight > maxBottom) {
+          verticalPosition = minTop; // 重置到顶部
+        }
+        
+        while (!foundPosition && attempts < maxAttempts) {
+          // 确保位置在容器范围内
+          if (verticalPosition < minTop) {
+            verticalPosition = minTop;
+          }
+          if (verticalPosition + danmakuHeight > maxBottom) {
+            // 如果超出底部，尝试向上寻找
+            let foundUpward = false;
+            for (let testTop = minTop; testTop < maxBottom - danmakuHeight; testTop += 8) {
+              const testBox = {
+                left: startLeft,
+                right: startRight,
+                top: testTop,
+                bottom: testTop + danmakuHeight
+              };
+              
+              const testNewDanmakuInfo = {
+                startTime: now + delay * 1000,
+                duration: duration,
+                width: danmakuWidth
+              };
+              
+              const checkTime = now + delay * 1000;
+              if (!checkCollisionWithAllDanmakus(testBox, checkTime, null, testNewDanmakuInfo)) {
+                verticalPosition = testTop;
+                foundUpward = true;
+                foundPosition = true;
+                break;
+              }
+            }
+            
+            if (!foundUpward) {
+              // 如果向上找不到位置，返回null表示无法放置
+              console.log("无法找到合适的弹幕位置，跳过此弹幕");
+              danmaku.remove();
+              return; // 不创建这个弹幕
+            }
+            break;
+          }
+          
+          // 构建新弹幕的边界框
+          const newBox = {
+            left: startLeft,
+            right: startRight,
+            top: verticalPosition,
+            bottom: verticalPosition + danmakuHeight
+          };
+          
+          // 检查与所有现有弹幕的碰撞（考虑延迟后的时间）
+          const checkTime = now + delay * 1000;
+          
+          // 准备新弹幕信息用于预测性碰撞检测
+          const newDanmakuInfo = {
+            startTime: checkTime,
+            duration: duration,
+            width: danmakuWidth
+          };
+          
+          // 不仅检查开始位置，还要检查整个动画过程
+          if (!checkCollisionWithAllDanmakus(newBox, checkTime, null, newDanmakuInfo)) {
+            foundPosition = true;
+            break;
+          }
+          
+          // 如果重叠，尝试下一个位置（每次增加8px，更精细）
+          verticalPosition += 8;
+          attempts++;
+        }
+        
+        // 如果还是找不到位置，不创建弹幕
+        if (!foundPosition) {
+          console.log("经过多次尝试仍无法找到合适的弹幕位置，跳过此弹幕");
+          danmaku.remove();
+          return; // 不创建这个弹幕
+        }
+        
+        // 最终检查：确保位置在容器范围内
+        verticalPosition = Math.max(minTop, Math.min(verticalPosition, maxBottom - danmakuHeight));
+        
+        danmaku.style.top = `${verticalPosition}px`;
+        danmaku.style.visibility = "visible";
+        danmaku.style.animationDuration = `${duration}s`;
+        danmaku.style.animationDelay = `${delay}s`;
+        
+        // 生成唯一ID用于跟踪
+        const danmakuId = `danmaku_${now}_${Math.random().toString(36).substr(2, 9)}`;
+        
+        // 记录这条弹幕的信息
+        trackLastDanmaku[trackIndex] = {
+          time: now,
+          duration: duration,
+          width: danmakuWidth
+        };
+        
+        // 记录到全局活动弹幕列表
+        allActiveDanmakus.push({
+          id: danmakuId,
+          top: verticalPosition,
+          height: danmakuHeight,
+          width: danmakuWidth,
+          startTime: now + delay * 1000, // 实际开始时间
+          duration: duration,
+          trackIndex: trackIndex
+        });
+        
+        // 强制浏览器应用样式和动画
+        danmaku.offsetHeight;
+        danmaku.style.animationPlayState = "running";
+
+        // 动画结束后移除元素
+        danmaku.addEventListener("animationend", () => {
+          danmaku.remove();
+          // 从活动弹幕列表中移除
+          const index = allActiveDanmakus.findIndex(item => item.id === danmakuId);
+          if (index > -1) {
+            allActiveDanmakus.splice(index, 1);
+          }
+        });
+      }
+
+      let danmakuInterval = null;
+      let danmakuIndex = 0;
+      let danmakuContainer = null;
+      // 跟踪每个轨道上最后一条弹幕的创建时间和信息
+      let trackLastDanmaku = {};
+      // 跟踪所有活动弹幕的完整边界信息（用于精确碰撞检测）
+      let allActiveDanmakus = [];
+
+      function initDanmaku() {
+        console.log("初始化弹幕");
+        
+        // 确保在insight页面内查找容器
+        const container = document.querySelector(".page.insight .danmaku-container");
+        if (!container) {
+          console.log("弹幕容器未找到，尝试其他方式");
+          const allPages = document.querySelectorAll('.page');
+          allPages.forEach((page, idx) => {
+            if (page.classList.contains('insight')) {
+              const c = page.querySelector(".danmaku-container");
+              if (c) {
+                console.log("在页面", idx, "找到容器");
+                initDanmakuInContainer(c);
+                return;
+              }
+            }
+          });
+          return;
+        }
+
+        initDanmakuInContainer(container);
+      }
+      
+      function initDanmakuInContainer(container) {
+        console.log("在容器中创建弹幕");
+        
+        // 保存container引用
+        danmakuContainer = container;
+        
+        // 清空现有弹幕和跟踪信息
+        container.innerHTML = "";
+        danmakuIndex = 0;
+        trackLastDanmaku = {};
+        allActiveDanmakus = [];
+
+        const trackCount = 3; // 固定3条轨道
+        
+        // 跟踪当前应该使用的轨道（按顺序循环）
+        let currentTrackIndex = 0;
+
+        // 只创建3条初始弹幕，每条轨道一条，错开时间
+        console.log("创建初始弹幕");
+        for (let i = 0; i < trackCount; i++) {
+          const text = danmakuTexts[danmakuIndex % danmakuTexts.length];
+          const delay = i * 10; // 每条弹幕间隔10秒，确保不会同时出现
+          createDanmaku(text, i, delay, container);
+          danmakuIndex++;
+        }
+
+        // 持续添加新弹幕，按轨道顺序循环，确保每条轨道上的弹幕不会同时出现
+        if (danmakuInterval) {
+          clearInterval(danmakuInterval);
+        }
+        danmakuInterval = setInterval(() => {
+          if (!danmakuContainer) return;
+          
+          // 按顺序循环使用轨道：0, 1, 2, 0, 1, 2...
+          const trackIndex = currentTrackIndex;
+          currentTrackIndex = (currentTrackIndex + 1) % trackCount;
+          
+          const text = danmakuTexts[danmakuIndex % danmakuTexts.length];
+          
+          // 计算与同轨道上一条弹幕的最小间隔时间（秒）
+          const minIntervalBetweenSameTrack = 15; // 同一轨道上弹幕之间至少间隔15秒
+          
+          // 检查同轨道上最后一条弹幕的时间
+          const lastDanmaku = trackLastDanmaku[trackIndex];
+          let baseDelay = 0;
+          
+          if (lastDanmaku) {
+            const timeSinceLast = (Date.now() - lastDanmaku.time) / 1000; // 秒
+            if (timeSinceLast < minIntervalBetweenSameTrack) {
+              // 如果距离上一条弹幕时间太短，增加延迟
+              baseDelay = minIntervalBetweenSameTrack - timeSinceLast;
+            }
+          }
+          
+          createDanmaku(text, trackIndex, baseDelay, danmakuContainer);
+          danmakuIndex++;
+        }, 8000); // 每8秒尝试添加一条新弹幕，按轨道顺序循环，增加间隔避免重叠
+        
+        // 添加全局定期清理机制，确保不会累积过多过期的弹幕记录
+        if (window.danmakuCleanupInterval) {
+          clearInterval(window.danmakuCleanupInterval);
+        }
+        window.danmakuCleanupInterval = setInterval(() => {
+          const currentTime = Date.now();
+          // 清理过期的活动弹幕记录
+          allActiveDanmakus = allActiveDanmakus.filter(item => {
+            const elapsed = (currentTime - item.startTime) / 1000;
+            return elapsed < item.duration + 2;
+          });
+          // 清理过期的轨道记录
+          for (const trackIdx in trackLastDanmaku) {
+            const lastDanmaku = trackLastDanmaku[trackIdx];
+            const elapsed = (currentTime - lastDanmaku.time) / 1000;
+            if (elapsed > lastDanmaku.duration + 5) {
+              delete trackLastDanmaku[trackIdx];
+            }
+          }
+        }, 3000); // 每3秒清理一次，确保及时清理
+      }
+
+      function stopDanmaku() {
+        if (danmakuInterval) {
+          clearInterval(danmakuInterval);
+          danmakuInterval = null;
+        }
+        if (window.danmakuCleanupInterval) {
+          clearInterval(window.danmakuCleanupInterval);
+          window.danmakuCleanupInterval = null;
+        }
+        const insightPage = document.querySelector('.page.insight');
+        if (insightPage) {
+          const container = insightPage.querySelector(".danmaku-container");
+          if (container) {
+            container.innerHTML = "";
+          }
+        }
+        // 清空所有跟踪信息
+        allActiveDanmakus = [];
+        trackLastDanmaku = {};
+      }
+    </script>
+  </body>
+</html>
+
